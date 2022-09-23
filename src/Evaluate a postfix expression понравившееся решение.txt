@@ -1,0 +1,20 @@
+import java.util.Stack;
+
+public class Evaluator {
+
+  public long evaluate(String expr) {
+    if (expr.length() == 0) return 0;
+    Stack<Long> stack = new Stack<Long>();
+    for (String el : expr.split(" ")) {
+      switch (el) {
+        case "+": stack.push(stack.pop() + stack.pop()); break;
+        case "-": stack.push(-stack.pop() + stack.pop()); break;
+        case "*": stack.push(stack.pop() * stack.pop()); break;
+        case "/": long a = stack.pop(); stack.push(stack.pop() / a); break;
+        default: stack.push(Long.parseLong(el));
+      }
+    }
+    return stack.pop();
+  }
+
+}
